@@ -1,0 +1,10 @@
+docker pull nginx;
+mkdir -p /docker;
+mkdir -p /docker/html;
+mkdir -p /docker/configs;
+echo '<html> <head> <title>Docker nginx</title> </head> <body> <div class="container"> <h1>Hello Custom</h1> <p>This Nginx page is brought to you by Docker and Blukach Studio</p> </div> </body> </html>' > /docker/html/index.html;
+docker run --name docker-nginx -p 80:80 -d nginx;
+docker cp docker-nginx:/etc/nginx/conf.d/default.conf /docker/configs/default.conf;
+docker stop docker-nginx;
+docker rm docker-nginx;
+docker run --name docker-nginx -p 80:80 -v /docker/html:/usr/share/nginx/html -v /docker/configs/default.conf:/etc/nginx/conf.d/default.conf -d nginx;
