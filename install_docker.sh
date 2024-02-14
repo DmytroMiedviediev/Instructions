@@ -15,4 +15,18 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y install software-properties-commo
 yes | curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -;
 yes | sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable";
 apt-cache policy docker-ce;
-yes | sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin;
+
+echo "docker-ce docker-ce/install-setuid boolean true" | sudo debconf-set-selections;
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install docker-ce;
+
+echo "docker-ce-cli docker-ce-cli/install-setuid boolean true" | sudo debconf-set-selections;
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install docker-ce-cli;
+
+echo "containerd.io containerd.io/install-setuid boolean true" | sudo debconf-set-selections;
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install containerd.io;
+
+echo "docker-buildx-plugin docker-buildx-plugin/install-setuid boolean true" | sudo debconf-set-selections;
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install docker-buildx-plugin;
+
+echo "docker-compose-plugin docker-compose-plugin/install-setuid boolean true" | sudo debconf-set-selections;
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install docker-compose-plugin;
