@@ -7,4 +7,4 @@ docker run --name docker-nginx -p 80:80 -d nginx;
 docker cp docker-nginx:/etc/nginx/conf.d/default.conf /docker/configs/default.conf;
 docker stop docker-nginx;
 docker rm docker-nginx;
-docker run --name docker-nginx -p 80:80 -v /docker/html:/usr/share/nginx/html -v /docker/configs/default.conf:/etc/nginx/conf.d/default.conf -d nginx;
+docker run --name docker-nginx -p 80:80 -v /docker/html:/usr/share/nginx/html -v /docker/configs:/etc/nginx/conf.d -d nginx;
